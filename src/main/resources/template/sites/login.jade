@@ -1,0 +1,45 @@
+extends ../master
+
+block scripts
+    script(type="text/javascript", src="/scripts/login.js")
+    script(type="text/javascript").
+        data = {
+            username: "",
+            password: ""
+        };
+
+block content
+  div#loginForm(@keyup.enter="signIn")
+    div.panel-text-center
+      form.form-signin
+          h4.mb-3 Please sign in
+          .row
+            .col-xl-6
+              //- Invoice Id, Field should fill automatically if saved.
+              .row.form-group
+                label.form-control-label.col-form-label.col-md-3 Username
+                .col-md-5
+                  input.form-control(
+                    :name="username",
+                    :classes="['login']",
+                    v-model="username",
+                    autofocus='true',
+                    :max-length="32"
+                  )
+          .row
+            .col-xl-6
+              //- Invoice Id, Field should fill automatically if saved.
+              .row.form-group
+                label.form-control-label.col-form-label.col-md-3 Password
+                .col-md-5
+                  input.form-control(
+                    :name="password",
+                    :classes="['login']",
+                    v-model="password",
+                    autofocus='true',
+                    :max-length="32"
+                  )
+          .row.mt-4: .col-2
+              button.btn.btn-primary(type="button", style="width: 100%", @click="signIn")
+                  span.fa.fa-sign-in.mr-2
+                  | Sign In

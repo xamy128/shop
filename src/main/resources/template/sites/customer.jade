@@ -1,0 +1,23 @@
+extends ../../master
+
+block scripts
+    //script(type="text/javascript", src=u.resource("/scripts/sites/customer.js"))
+    script(type="text/javascript").
+        data = {
+            customer: !{u.toJson(customer)},
+            originalCustomer: !{u.toJson(customer)},
+            createNewCustomer: !{u.toJson(createNew)},
+
+            address: {location: {}, contact: {}},
+            originalAddress: {location: {}, contact: {}},
+            addressValid: false,
+            addressValidationTarget: {},
+            addressChangesTarget: {},
+            addressChanged: false,
+
+            usernameMap: !{u.toJson(usernameMap)},
+            bookingAccounts: !{u.toJson(bookingAccounts)}
+        };
+
+block content
+    div#customerForm

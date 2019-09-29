@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        //- Meta tags
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
+        meta(name="turbolinks-cache-control", content="no-cache")
+
+
+        //- Webjars
+        link(rel="stylesheet", type="text/css", href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css")
+
+        //- Font awesome
+        // link(rel="stylesheet",  href="/webjars/font-awesome/5.9.0/css/font-awesome.min.css")
+        //- Bootstrap css
+
+        link(rel="stylesheet", href="/styles/main.css")
+
+        //- Head placeholder
+        block head
+        //- Scripts
+        //- Webjars
+        script(src="/webjars/jquery/3.4.1/jquery.min.js", type="text/javascript")
+        script(src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js", type="text/javascript")
+        script(src="/webjars/vue/2.6.10/vue.min.js", type="text/javascript")
+
+
+
+        //- Local
+
+        //- Head parameters
+        title= title
+
+    body
+        .container
+            block content
+
+        block scripts

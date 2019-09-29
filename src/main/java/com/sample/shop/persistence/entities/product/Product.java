@@ -1,6 +1,7 @@
 package com.sample.shop.persistence.entities.product;
 
 import com.sample.shop.common.persistence.TimedEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +13,8 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-@Getter  @Setter  @NoArgsConstructor
+@Getter  @Setter @AllArgsConstructor @NoArgsConstructor
 public class Product extends TimedEntity {
-
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,29 +35,6 @@ public class Product extends TimedEntity {
     Boolean isActive = false;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     ProductCategory productCategory = ProductCategory.MISCELLANEOUS;
-
-    public enum ProductCategory {
-        MISCELLANEOUS,
-        BOOK,
-        GAME,
-        CLOTHES,
-        TOYS,
-        APPLIANCES,
-        FURNITURE
-    }
-
-    public Product (int id,
-             String name,
-             BigDecimal price,
-             int availableQuantity,
-             boolean isActive,
-             ProductCategory productCategory) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.availableQuantity = availableQuantity;
-        this.isActive = isActive;
-        this.productCategory = productCategory;
-    }
 }

@@ -100,6 +100,21 @@ public class RestResponse<T> {
         );
     }
 
+    private Response<T> unknownUser(String message) {
+        String errorMessage = message;
+
+        if(message == null || message.equals(""))
+            errorMessage = tempUtils.message("error.unknown_user.msg");
+        return new Response<>(
+                HttpStatus.NOT_FOUND,
+                new Message(
+                        tempUtils.message("error.unknown_user.title"),
+                        errorMessage,
+                        MessageType.DANGER
+                )
+        );
+    }
+
     private Response<T> unknownError(String message) {
         String errorMessage = message;
 
@@ -117,7 +132,7 @@ public class RestResponse<T> {
     }
 
     private Response<T> coreException(Throwable throwable) {
-        CoreException coreException = (CoreException) throwable.getCause();
+        CoreException coreException = (CoreException) throwable;
 
         if(coreException.getExceptionType() == ExceptionType.DUPLICATE_KEY){
             return duplicateKey(coreException.getMessage());
@@ -126,6 +141,11 @@ public class RestResponse<T> {
         else if(coreException.getExceptionType() == ExceptionType.NO_ENTITY) {
             return noEntity(coreException.getMessage());
         }
+
+        else if(coreException.getExceptionType() == ExceptionType.USER_UNKNOWN) {
+            return unknownUser(coreException.getMessage());
+        }
+
         else
             return unknownError(coreException.getMessage());
     }
@@ -135,7 +155,7 @@ public class RestResponse<T> {
 
         if (cause instanceof NullPointerException)
             return nullPointerException();
-        else if (cause instanceof CoreException)
+        else if (throwable instanceof  CoreException || cause instanceof CoreException)
             return coreException(throwable);
 
         else

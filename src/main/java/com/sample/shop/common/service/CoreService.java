@@ -19,6 +19,10 @@ public abstract class CoreService<TEnt, TKey, TRep extends JpaRepository<TEnt, T
     private TRep repository;
     private final int defaultPageSize = 50;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    public CoreService(TRep repository) {
+        this.repository = repository;
+    }
     @Transactional
     public TEnt create(TEnt entity) {
         return repository.save(entity);
@@ -42,12 +46,7 @@ public abstract class CoreService<TEnt, TKey, TRep extends JpaRepository<TEnt, T
 
     @Transactional
     public void delete(TKey key) {
-        Optional<TEnt> entity = repository.findById(key);
-
-        if(!entity.isPresent())
-            throw new CoreException(ExceptionType.DUPLICATE_KEY, "error.duplicate_key.msg");
-        else
-            repository.delete(entity.get());
+            repository.delete(isEntityExist(key));
     }
 
     @Transactional

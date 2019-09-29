@@ -30,6 +30,7 @@ public class CustomerAddress extends Address {
     @NotNull
     Boolean isDefaultDeliveryAddress = false;
 
+
     public CustomerAddress(String houseNo,
                            String street,
                            String city,

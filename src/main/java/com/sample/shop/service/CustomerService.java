@@ -1,13 +1,13 @@
 package com.sample.shop.service;
 
 import com.sample.shop.common.service.CoreException;
-import com.sample.shop.common.service.CoreService;
 import com.sample.shop.common.service.ExceptionType;
+import com.sample.shop.common.service.TimedCoreService;
 import com.sample.shop.persistence.entities.customer.Customer;
 import com.sample.shop.persistence.entities.customer.CustomerAddress;
+import com.sample.shop.persistence.entities.customer.CustomerAddressKey;
 import com.sample.shop.persistence.repositories.CustomerAddressRepository;
 import com.sample.shop.persistence.repositories.CustomerRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.Optional;
  * @author Ammarah.Shakeel
  */
 @Service
-@NoArgsConstructor
-public class CustomerService extends CoreService<Customer, String, CustomerRepository> {
-    private CustomerRepository customerRepository;
+public class CustomerService extends TimedCoreService<Customer, String, CustomerRepository> {
+    private CustomerRepository repository;
     private CustomerAddressRepository customerAddressRepository;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, CustomerAddressRepository customerAddressRepository) {
-    this.customerRepository = customerRepository;
-    this.customerAddressRepository = customerAddressRepository;
+        super(customerRepository);
+        this.repository = customerRepository;
+        this.customerAddressRepository = customerAddressRepository;
     }
 
     /**
@@ -35,9 +35,12 @@ public class CustomerService extends CoreService<Customer, String, CustomerRepos
      * @param customer new customer entity
      * @return newly created customer
      */
-    public Customer create(Customer customer) {
+    public Customer create(Customer customer, List<CustomerAddress> addresses) {
         Customer newCustomer = super.create(customer);
-        saveAllAddress(newCustomer.getUsername(), customer.getAddresses());
+
+        if(addresses != null && addresses.size() > 0){
+            saveAllAddress(newCustomer.getUsername(), addresses);
+        }
         return newCustomer;
     }
 
@@ -47,9 +50,12 @@ public class CustomerService extends CoreService<Customer, String, CustomerRepos
      * @param customer to update customer entity
      * @return updated customers
      */
-    public Customer update(String username, Customer customer) {
+    public Customer update(String username, Customer customer, List<CustomerAddress> addresses) {
         Customer updateCustomer = super.update(username, customer);
-        saveAllAddress(username, customer.getAddresses());
+
+        if(addresses != null && addresses.size() > 0){
+            saveAllAddress(username, addresses);
+        }
         return updateCustomer;
     }
 
@@ -63,13 +69,19 @@ public class CustomerService extends CoreService<Customer, String, CustomerRepos
             String username,
             List<CustomerAddress> addresses
     ) {
-        customerAddressRepository.deleteAll(
-                customerAddressRepository.findByCustomerId(username)
-        );
+        List<CustomerAddress> oldAddresses = customerAddressRepository.findByCustomerId(username);
+
+        if(oldAddresses.size() > 0) {
+            customerAddressRepository.deleteAll(oldAddresses);
+        }
 
         for (CustomerAddress address: addresses)
-         {
+        {
             checkAddressHasType(address);
+        }
+
+        for (int i = 0; i < addresses.size(); i++) {
+            addresses.get(i).setKey(new CustomerAddressKey(username, i));
         }
         return customerAddressRepository.saveAll(addresses);
     }
@@ -81,9 +93,9 @@ public class CustomerService extends CoreService<Customer, String, CustomerRepos
      * @return authenticated customer
      */
     public Customer authenticate(String username, String password) {
-        Optional<Customer> customer = customerRepository.authenticate(username, password);
+        Optional<Customer> customer = repository.authenticate(username, password);
         if(!customer.isPresent()) {
-           throw new CoreException(ExceptionType.USER_UNKNOWN,
+            throw new CoreException(ExceptionType.USER_UNKNOWN,
                     "User with username and password does not exist. Please check your credentials and try again!");
         }
         return customer.get();

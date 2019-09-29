@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ViewResolver;
  */
 @Configuration
 class JadeConfig {
-
     @Bean
     public SpringTemplateLoader templateLoader() {
         SpringTemplateLoader templateLoader = new SpringTemplateLoader();

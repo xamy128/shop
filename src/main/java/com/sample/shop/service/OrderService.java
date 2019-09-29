@@ -1,6 +1,7 @@
 package com.sample.shop.service;
 
 import com.sample.shop.common.service.CoreService;
+import com.sample.shop.common.service.TimedCoreService;
 import com.sample.shop.persistence.entities.order.Order;
 import com.sample.shop.persistence.entities.order.OrderItem;
 import com.sample.shop.persistence.entities.product.Product;
@@ -9,6 +10,8 @@ import com.sample.shop.persistence.repositories.OrderRepository;
 import com.sample.shop.persistence.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,13 +23,18 @@ import java.util.stream.IntStream;
  * @author Ammarah.Shakeel
  */
 @Service
-public class OrderService extends CoreService<Order, Integer, OrderRepository> {
+public class OrderService extends TimedCoreService<Order, Integer, OrderRepository> {
     private OrderRepository orderRepository;
     private OrderItemRepository orderItemRepository;
     private ProductRepository productRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository) {
+    public OrderService(
+            OrderRepository orderRepository,
+            OrderItemRepository orderItemRepository,
+            ProductRepository productRepository
+    ) {
+        super(orderRepository);
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.productRepository = productRepository;

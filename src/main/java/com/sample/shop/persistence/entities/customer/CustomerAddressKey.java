@@ -1,5 +1,6 @@
 package com.sample.shop.persistence.entities.customer;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,9 +14,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CustomerAddressKey implements Serializable {
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(max = 32)
     String username = "";
 
     @NotNull

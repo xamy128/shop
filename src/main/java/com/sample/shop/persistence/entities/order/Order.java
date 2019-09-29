@@ -52,6 +52,7 @@ public class Order extends TimedEntity {
 
     // var autoSendInvoiceEmail: Boolean = false
 
+    // add refrence to order items here
     public Order(BigDecimal totalPrice, Integer totalQuantity) {
         this.totalPrice = totalPrice;
         this.totalQuantity = totalQuantity;

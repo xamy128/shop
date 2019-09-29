@@ -5,7 +5,7 @@ package com.sample.shop.persistence.entities;
  */
 public enum PaymentMethod {
     BANK_TRANSFER,
-    DEBIT_CARD,
-    SEPA_PAYMENT,
+    CASH,
+    SEPA,
     OTHER
 }

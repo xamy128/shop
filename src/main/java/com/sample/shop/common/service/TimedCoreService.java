@@ -4,6 +4,7 @@ import com.sample.shop.common.persistence.TimedEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.OffsetDateTime;
 
 /**
  * To add tracking information for each entity.
@@ -20,19 +21,24 @@ public abstract class TimedCoreService<
         >
         extends CoreService<TTEnt, TKey, TRep> {
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    public TimedCoreService(TRep repository) {
+        super(repository);
+    }
+
     @Transactional
     public TTEnt create(TTEnt entity) {
         entity.setCreatedBy("abc");
-     //   entity.setCreationTime(OffsetDateTime.now());
+        entity.setCreationTime(OffsetDateTime.now());
         entity.setLastUpdateBy("abc");
-   //     entity.setLastUpdateTime(OffsetDateTime.now());
+        entity.setLastUpdateTime(OffsetDateTime.now());
         return super.create(entity);
     }
 
     @Transactional
     public TTEnt update(TKey key, TTEnt entity) {
         entity.setLastUpdateBy("abc");
-  //      entity.setLastUpdateTime(OffsetDateTime.now());
+        entity.setLastUpdateTime(OffsetDateTime.now());
         return super.update(key, entity);
     }
 }

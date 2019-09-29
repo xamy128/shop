@@ -26,12 +26,19 @@ public class OrderController extends RestfulController<Order, Integer, OrderRepo
 
     @Autowired
     public OrderController(OrderService orderService, RestResponse<Order> restResponse) {
+        super(orderService, restResponse);
         this.orderService = orderService;
         this.restResponse = restResponse;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody Order order)
+    {
+        throw new NotImplementedException();
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    public ResponseEntity update(@RequestBody Order order)
     {
         throw new NotImplementedException();
     }

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CustomerAddressRepository extends JpaRepository<CustomerAddress, CustomerAddressKey> {
 
-    @Query("select ca from CustomerAddress ca where ca.key.customerId = ?1 order by ca.key.entryId")
+    @Query("select ca from CustomerAddress ca where ca.key.username = ?1 order by ca.key.entryId")
      List<CustomerAddress> findByCustomerId(String username);
 }

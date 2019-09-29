@@ -20,7 +20,6 @@ public abstract class RestfulController<TEnt, TKey, TRep extends JpaRepository<T
     private CoreService<TEnt, TKey, TRep> service;
     private RestResponse<TEnt> restResponse;
 
-    @Autowired
     public RestfulController(CoreService<TEnt, TKey, TRep> coreService, RestResponse<TEnt> restResponse) {
         this.service = coreService;
         this.restResponse = restResponse;

@@ -49,6 +49,6 @@ public class Customer extends TimedEntity {
     @Enumerated(EnumType.STRING)
     PaymentMethod paymentMethod = PaymentMethod.BANK_TRANSFER;
 
-    @OneToMany(mappedBy = "key.customerId")
+    @OneToMany(mappedBy = "key.username")
     List<CustomerAddress> addresses = new ArrayList<>();
 }

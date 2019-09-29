@@ -1,5 +1,6 @@
 package com.sample.shop.controllers;
 
+import com.sample.shop.common.controller.RestResponse;
 import com.sample.shop.common.controller.RestfulController;
 import com.sample.shop.persistence.repositories.ProductRepository;
 import com.sample.shop.service.ProductService;
@@ -11,17 +12,10 @@ import org.springframework.web.bind.annotation.*;
  * Rest controller with endpoints for products
  */
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/products")
 public class ProductController extends RestfulController<Product, Integer, ProductRepository> {
-   private ProductService productService;
-
     @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
-    public Product update(@PathVariable int productId, @RequestBody Product product) {
-        return productService.update(productId, product);
+    public ProductController(ProductService productService, RestResponse<Product> restResponse) {
+        super(productService, restResponse);
     }
 }

@@ -17,7 +17,7 @@ $(() => {
 
 
 
-                let url = '/api/authenticate';
+                let url = '/api/auth';
 
                 $.get(url, this.username).done(() => {
                     let xx = ""

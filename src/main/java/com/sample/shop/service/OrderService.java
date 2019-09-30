@@ -1,6 +1,5 @@
 package com.sample.shop.service;
 
-import com.sample.shop.common.service.CoreService;
 import com.sample.shop.common.service.TimedCoreService;
 import com.sample.shop.persistence.entities.order.Order;
 import com.sample.shop.persistence.entities.order.OrderItem;
@@ -10,8 +9,6 @@ import com.sample.shop.persistence.repositories.OrderRepository;
 import com.sample.shop.persistence.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;

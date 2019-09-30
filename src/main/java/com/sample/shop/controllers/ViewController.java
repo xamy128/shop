@@ -2,7 +2,6 @@ package com.sample.shop.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.HashMap;
 import java.util.Map;
 

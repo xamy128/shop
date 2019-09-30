@@ -31,6 +31,7 @@ public class OrderController extends RestfulController<Order, Integer, OrderRepo
         this.restResponse = restResponse;
     }
 
+    // create and update should not be called with this mapping
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody Order order)
     {
@@ -43,6 +44,11 @@ public class OrderController extends RestfulController<Order, Integer, OrderRepo
         throw new NotImplementedException();
     }
 
+    /**
+     * create new order
+     * @param data A List containing a List of productIds and List of selected quantities of each product
+     * @return new order
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody List<List<Integer>> data) {
         Response response =  restResponse.createSuccessful(

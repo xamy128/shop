@@ -9,6 +9,7 @@ import com.sample.shop.persistence.repositories.ProductRepository;
 import com.sample.shop.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -18,6 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test case for Order Service class
+ */
 @RunWith(SpringRunner.class)
 public class OrderServiceTest {
     @Mock
@@ -35,24 +39,32 @@ public class OrderServiceTest {
      */
     @Test
     public void createOrder_test() {
-        List<Integer> productIds = Arrays.asList(2);
-        List<Integer> testQuantities = Arrays.asList(5);
+        List<Integer> productIds = Arrays.asList(2, 3);
+        List<Integer> testQuantities = Arrays.asList(5, 6);
 
         List<Product> testProducts = DataProvider.getProducts();
         Order order = new Order(new BigDecimal(2), 5);
         order.setOrderId(0);
 
         List<OrderItem> testOrderItems = Arrays.asList(new OrderItem(
-                order.getOrderId(),
-                0,
-                5,
-                testProducts.get(0).getId(),
-                testProducts.get(0).getPrice()
-        ));
+                        order.getOrderId(),
+                        0,
+                        testQuantities.get(0),
+                        testProducts.get(0).getId(),
+                        testProducts.get(0).getPrice()
+                ),
+                new OrderItem(
+                        order.getOrderId(),
+                        1,
+                        testQuantities.get(1),
+                        testProducts.get(1).getId(),
+                        testProducts.get(1).getPrice()
+                )
+        );
 
-        when(productRepository.findAllById(any(List.class))).thenReturn(testProducts);
+        when(productRepository.findAllById(ArgumentMatchers.anyList())).thenReturn(testProducts);
         when(orderRepository.save(any(Order.class))).thenReturn(order);
-        when(orderItemRepository.saveAll(any(List.class))).thenReturn(testOrderItems);
+        when(orderItemRepository.saveAll(ArgumentMatchers.anyList())).thenReturn(testOrderItems);
         Order newOrder = orderService.create(productIds, testQuantities);
         assertEquals(order.getOrderId(), newOrder.getOrderId());
     }

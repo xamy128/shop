@@ -13,5 +13,4 @@ public enum  ExceptionType {
     USER_UNKNOWN,
     NO_ACCESS,
     UNKNOWN
-
 }

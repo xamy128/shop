@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Entity for customer addresses
+ */
 @Entity
 @Table(name = "customer_addresses")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor

@@ -10,6 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+/**
+ * Composite key for Custom Address Entity
+ */
 @Embeddable
 @Getter
 @Setter

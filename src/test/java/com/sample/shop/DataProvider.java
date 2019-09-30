@@ -4,15 +4,20 @@ import com.sample.shop.persistence.entities.PaymentMethod;
 import com.sample.shop.persistence.entities.customer.Customer;
 import com.sample.shop.persistence.entities.customer.CustomerAddress;
 import com.sample.shop.persistence.entities.product.Product;
-
+import com.sample.shop.persistence.entities.product.ProductCategory;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+/**
+ * Provides data for test cases
+ */
 public class DataProvider {
 
+    /**
+     * @return a list of valid customer addresses
+     */
     public static List<CustomerAddress> getCustomerAddresses() {
         CustomerAddress customerAddressInvoice = new CustomerAddress(
                 "24A",
@@ -26,6 +31,7 @@ public class DataProvider {
                 true,
                 false
         );
+
         CustomerAddress customerAddressDelivery = new CustomerAddress(
                 "25",
                 "fakerlane",
@@ -51,13 +57,16 @@ public class DataProvider {
                 true,
                 false
         );
-       return Arrays.asList(
+        return Arrays.asList(
                 customerAddressBothTrue,
                 customerAddressDelivery,
                 customerAddressInvoice
         );
     }
 
+    /**
+     * @return a list of invalid customer addresses
+     */
     public static List<CustomerAddress> getInvalidCustomerAddresses() {
         List<CustomerAddress> addresses = new ArrayList<>(getCustomerAddresses());
         for (CustomerAddress address: addresses) {
@@ -67,6 +76,9 @@ public class DataProvider {
         return addresses;
     }
 
+    /**
+     * @return single customer
+     */
     public static Customer getSingleCustomer() {
         return new Customer(
                 "test",
@@ -80,14 +92,26 @@ public class DataProvider {
         );
     }
 
-     static List<Product> getProducts() {
-       return Collections.singletonList(new Product(
-                2,
-                "pro1",
-                new BigDecimal(5),
-                2,
-                true,
-                Product.ProductCategory.MISCELLANEOUS
-        ));
+    /**
+     * @return list of products
+     */
+    static List<Product> getProducts() {
+        return Arrays.asList(
+                new Product(
+                        2,
+                        "pro1",
+                        new BigDecimal(5),
+                        66,
+                        true,
+                        ProductCategory.MISCELLANEOUS
+                ),
+                new Product(
+                        3,
+                        "pro2",
+                        new BigDecimal(7),
+                        34,
+                        true,
+                        ProductCategory.GAME)
+        );
     }
 }

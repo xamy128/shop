@@ -17,13 +17,13 @@ public class Response<T> {
     private T data;
     private Message message;
 
-     Response(HttpStatus status, T data, Message message) {
+    Response(HttpStatus status, T data, Message message) {
         this.status = status;
         this.data = data;
         this.message = message;
     }
 
-     Response(HttpStatus status, Message message) {
+    Response(HttpStatus status, Message message) {
         this.status = status;
         this.message = message;
     }

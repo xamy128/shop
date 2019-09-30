@@ -48,7 +48,7 @@ public class RestResponse<T> {
         );
     }
 
-     Response<T> deleteSuccessful() {
+    Response<T> deleteSuccessful() {
         return new Response<>(
                 HttpStatus.OK,
                 new Message(
@@ -150,7 +150,7 @@ public class RestResponse<T> {
             return unknownError(coreException.getMessage());
     }
 
-     Response<T> exception(Throwable throwable) {
+    Response<T> exception(Throwable throwable) {
         Throwable cause = throwable.getCause();
 
         if (cause instanceof NullPointerException)

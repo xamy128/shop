@@ -1,6 +1,5 @@
 package com.sample.shop.controllers;
 
-import com.sample.shop.persistence.entities.customer.Customer;
 import com.sample.shop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

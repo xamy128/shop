@@ -2,7 +2,6 @@ package com.sample.shop.common.controller;
 
 import com.sample.shop.common.service.CoreService;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

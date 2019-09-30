@@ -46,7 +46,7 @@ public abstract class CoreService<TEnt, TKey, TRep extends JpaRepository<TEnt, T
 
     @Transactional
     public void delete(TKey key) {
-            repository.delete(isEntityExist(key));
+        repository.delete(isEntityExist(key));
     }
 
     @Transactional
@@ -59,6 +59,6 @@ public abstract class CoreService<TEnt, TKey, TRep extends JpaRepository<TEnt, T
         Optional<TEnt> entity = repository.findById(key);
         if(!entity.isPresent())
             throw new CoreException(ExceptionType.NO_ENTITY);
-            return entity.get();
+        return entity.get();
     }
 }

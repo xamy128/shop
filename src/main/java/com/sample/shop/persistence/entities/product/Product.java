@@ -11,6 +11,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
+/**
+ * Product Entity
+ */
 @Entity
 @Table(name = "products")
 @Getter  @Setter @AllArgsConstructor @NoArgsConstructor

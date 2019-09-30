@@ -4,12 +4,14 @@ import com.sample.shop.persistence.entities.product.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+/**
+ * Order Item Entity
+ */
 @Entity
 @Table(name = "order_items")
 @Getter @Setter @NoArgsConstructor

@@ -18,7 +18,7 @@ public class CoreException extends RuntimeException {
         this.message = message;
     }
 
-     CoreException(ExceptionType exceptionType) {
+    CoreException(ExceptionType exceptionType) {
         this.exceptionType = exceptionType;
     }
 }

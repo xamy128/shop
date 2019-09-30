@@ -18,7 +18,6 @@ public class OrderItem {
     @EmbeddedId
     OrderItemKey key = new OrderItemKey();
 
-
     @NotNull
     int productId = -1;
 

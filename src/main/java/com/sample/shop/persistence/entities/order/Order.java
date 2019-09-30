@@ -4,11 +4,12 @@ import com.sample.shop.common.persistence.TimedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Order Entity
@@ -27,7 +28,7 @@ public class Order extends TimedEntity {
     private Integer orderId = -1;
 
     @NotNull
-    String userName = ""; // access to the current user somehow
+    String userName = "";
 
     @NotNull
     LocalDate date = LocalDate.now();
@@ -38,21 +39,9 @@ public class Order extends TimedEntity {
     @NotNull
     Integer totalQuantity = 0;
 
-//join with customer table
+    @OneToMany(mappedBy = "key.orderId")
+    List<OrderItem> items = new ArrayList<>();
 
-
-    // delivery status
-
-    //   var deliveryDueTo: java.time.LocalDate = java.time.LocalDate.now()
-
-    // Payment status
-    // Payment due
-
-    // var currency: String = ""
-
-    // var autoSendInvoiceEmail: Boolean = false
-
-    // add refrence to order items here
     public Order(BigDecimal totalPrice, Integer totalQuantity) {
         this.totalPrice = totalPrice;
         this.totalQuantity = totalQuantity;
